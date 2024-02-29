@@ -1,12 +1,72 @@
-type BannerProps = React.PropsWithChildren<{
-    variant: 'info' | 'warning' | 'error' | 'success';
-}>
+"use client";
 
-export const Banner = ({ children, variant }: BannerProps) => {
-    return (
-        <div className={`bg-${variant}-100 border-${variant}-400 text-${variant}-700 px-4 py-3 rounded relative`} role="alert">
-            <strong className="font-bold">{variant}</strong>
-            <span className="block sm:inline">{children}</span>
-        </div>
-    );
-}
+import cn from "classnames";
+
+import * as React from "react";
+
+import { useTheme } from "../theme-provider/theme-provider";
+import { Text, TextProps } from "../text/text";
+import s from "./banner.module.css";
+
+type BannerVariant = "default" | "error" | "info" | "success" | "warning";
+
+export type BannerProps = React.PropsWithChildren<{
+  variant?: BannerVariant;
+  icon?: React.ReactNode;
+  className?: string;
+  iconClassName?: string;
+}>;
+
+type BannerIconProps = React.PropsWithChildren<
+  Pick<BannerProps, "variant"> & { className?: string }
+>;
+
+export type BannerIconConfig = Record<BannerVariant, React.ReactNode>;
+
+const Icon: React.FC<React.PropsWithChildren<BannerIconProps>> = ({
+  children,
+  className,
+  variant = "default",
+}) => {
+  const { components } = useTheme();
+  const iconClasses = cn(s.icon, "banner__icon", className);
+  const textProps: Pick<TextProps, "as" | "className"> = {
+    as: "span",
+    className: iconClasses,
+  };
+
+  if (children) {
+    return <Text {...textProps}>{children}</Text>;
+  }
+
+  return components.banner.icons[variant] ? (
+    <Text {...textProps}>{components.banner.icons[variant]}</Text>
+  ) : null;
+};
+
+export const Banner: React.FC<BannerProps> = ({
+  children,
+  className,
+  icon,
+  iconClassName,
+  variant,
+}) => {
+  const bannerClasses = cn(
+    s.banner,
+    variant && [s[variant]],
+    "banner",
+    `banner--${variant}`,
+    className,
+  );
+
+  return (
+    <section className={bannerClasses}>
+      <Icon variant={variant} className={iconClassName}>
+        {icon}
+      </Icon>
+      {children}
+    </section>
+  );
+};
+
+export default Banner;
