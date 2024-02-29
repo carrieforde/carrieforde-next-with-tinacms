@@ -2,14 +2,21 @@ import { TINA_COMPONENTS } from "config";
 import parse from "html-react-parser";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Text } from "ui";
-import { client } from "../../tina/__generated__/client";
+import { client } from "../../../tina/__generated__/client";
 
-async function getPageData() {
-  return client.queries.page({ relativePath: "home/index.mdx" });
+async function getPageData(pageSlug: string) {
+  return client.queries.page({ relativePath: `${pageSlug}.mdx` });
 }
 
-export default async function Home() {
-  const { data } = await getPageData();
+type PageProps = {
+  params: {
+    page: string;
+  };
+  searchParams: Record<any, any>;
+};
+
+export default async function PagesPage({ params: { page } }: PageProps) {
+  const { data } = await getPageData(page);
 
   return (
     <>
