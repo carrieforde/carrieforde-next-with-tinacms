@@ -29,6 +29,78 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "job",
+        label: "Jobs",
+        path: "content/jobs",
+        fields: [
+          {
+            type: "string",
+            name: "company",
+            label: "Company",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "datetime",
+            name: "startDate",
+            label: "Start Date",
+            required: true,
+          },
+          {
+            type: "datetime",
+            name: "endDate",
+            label: "End Date",
+          },
+          {
+            type: "string",
+            name: "location",
+            label: "Location",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "title",
+            label: "Position",
+            required: true,
+          },
+          {
+            type: "rich-text",
+            name: "description",
+            label: "Description",
+            required: true,
+            isBody: true,
+          }
+        ]
+      },
+      {
+        name: "page",
+        label: "Pages",
+        path: "content/pages",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Description",
+            list: true,
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
+            required: true,
+          }
+        ]
+      },
+      {
         name: "post",
         label: "Posts",
         path: "content/posts",
@@ -42,10 +114,32 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "datetime",
+            name: "date",
+            label: "Date",
+            required: true,
+          },
+          {
+            type: "datetime",
+            name: "updated",
+            label: "Updated",
+          },
+          {
             type: "string",
             name: "category",
             label: "Category",
-            options: ["Engineering", "Design", "Product"],
+            options: [ "Development", "JavaScript", "WordPress"],
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Description",
+            list: true,
+          },
+          {
+            type: "boolean",
+            name: "showToc",
+            label: "Show Table of Contents",
           },
           {
             type: "rich-text",
