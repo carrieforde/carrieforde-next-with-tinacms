@@ -4,16 +4,24 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Text } from "ui";
 import { client } from "../../../tina/__generated__/client";
 
-async function getPageData(pageSlug: string) {
-  return client.queries.page({ relativePath: `${pageSlug}.mdx` });
-}
-
 type PageProps = {
   params: {
     page: string;
   };
   searchParams: Record<any, any>;
 };
+
+async function getPageData(pageSlug: string) {
+  return client.queries.page({ relativePath: `${pageSlug}.mdx` });
+}
+
+export async function generateMetadata({ params: { page } }: PageProps) {
+  const { data } = await getPageData(page);
+  return {
+    title: data.page.title,
+    description: data.page.description?.join(" "),
+  };
+}
 
 export default async function PagesPage({ params: { page } }: PageProps) {
   const { data } = await getPageData(page);
