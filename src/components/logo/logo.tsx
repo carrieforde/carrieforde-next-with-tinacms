@@ -15,31 +15,31 @@ export const Logo = () => (
         y2="106.2"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0" stop-color="var(--logo-gradient-start)" />
+        <stop offset="0" stopColor="var(--logo-gradient-start)" />
         <stop
           offset="0.12"
-          stop-color="var(--logo-gradient-1)"
-          stop-opacity="0.97"
+          stopColor="var(--logo-gradient-1)"
+          stopOpacity="0.97"
         />
         <stop
           offset="0.3"
-          stop-color="var(--logo-gradient-2)"
-          stop-opacity="0.88"
+          stopColor="var(--logo-gradient-2)"
+          stopOpacity="0.88"
         />
         <stop
           offset="0.52"
-          stop-color="var(--logo-gradient-3)"
-          stop-opacity="0.74"
+          stopColor="var(--logo-gradient-3)"
+          stopOpacity="0.74"
         />
         <stop
           offset="0.76"
-          stop-color="var(--logo-gradient-4)"
-          stop-opacity="0.54"
+          stopColor="var(--logo-gradient-4)"
+          stopOpacity="0.54"
         />
         <stop
           offset="1"
-          stop-color="var(--logo-gradient-end)"
-          stop-opacity="0.3"
+          stopColor="var(--logo-gradient-end)"
+          stopOpacity="0.3"
         />
       </linearGradient>
       <clipPath id="clip-path">

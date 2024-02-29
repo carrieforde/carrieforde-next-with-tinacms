@@ -1,4 +1,4 @@
-import { defineConfig } from "tinacms";
+import { Template, defineConfig } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -6,6 +6,69 @@ const branch =
   process.env.VERCEL_GIT_COMMIT_REF ||
   process.env.HEAD ||
   "main";
+
+const templates: Template[] = [
+  {
+    name: "Banner",
+    label: "Banner",
+    fields: [
+      {
+        name: "children",
+        label: "Content",
+        type: "rich-text",
+      },
+      {
+        name: "variant",
+        label: "Variant",
+        type: "string",
+        options: ["info", "warning", "error", "success"],
+      },
+    ],
+  },
+  {
+    name: "Image",
+    label: "Custom Image",
+    fields: [
+      {
+        name: "src",
+        label: "Image",
+        type: "image",
+      },
+      {
+        name: "alt",
+        label: "Alt Text",
+        type: "string",
+      },
+      {
+        name: "caption",
+        label: "Caption",
+        type: "string",
+      },
+      {
+        name: "width",
+        label: "Width",
+        type: "number",
+      },
+      {
+        name: "height",
+        label: "Height",
+        type: "number",
+      },
+      {
+        name: "float",
+        label: "Float",
+        type: "string",
+        options: ["left", "right", "none"],
+      },
+      {
+        name: "shape",
+        label: "Shape",
+        type: "string",
+        options: ["square", "circle"],
+      },
+    ],
+  },
+];
 
 export default defineConfig({
   branch,
@@ -69,8 +132,8 @@ export default defineConfig({
             label: "Description",
             required: true,
             isBody: true,
-          }
-        ]
+          },
+        ],
       },
       {
         name: "page",
@@ -97,8 +160,9 @@ export default defineConfig({
             label: "Body",
             isBody: true,
             required: true,
-          }
-        ]
+            templates,
+          },
+        ],
       },
       {
         name: "post",
@@ -128,7 +192,7 @@ export default defineConfig({
             type: "string",
             name: "category",
             label: "Category",
-            options: [ "Development", "JavaScript", "WordPress"],
+            options: ["Development", "JavaScript", "WordPress"],
           },
           {
             type: "string",
@@ -146,25 +210,7 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
-            templates: [
-              {
-                name: "Banner",
-                label: "Banner",
-                fields: [
-                  {
-                    name: "children",
-                    label: "Content",
-                    type: "rich-text"
-                  },
-                  {
-                    name: "variant",
-                    label: "Variant",
-                    type: 'string',
-                    options: ['info', 'warning', 'error', 'success'],
-                  }
-                ]
-              }
-            ],
+            templates,
           },
         ],
         ui: {

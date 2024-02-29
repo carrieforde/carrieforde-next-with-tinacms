@@ -2,7 +2,7 @@ import NextImage, { ImageProps as NextImageProps } from "next/image";
 import cn from "classnames";
 import s from "./image.module.css";
 
-type ImageProps = NextImageProps & {
+export type ImageProps = NextImageProps & {
   float?: "left" | "right" | "none";
   shape?: "square" | "circle";
 };
